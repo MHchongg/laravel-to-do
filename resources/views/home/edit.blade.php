@@ -5,12 +5,13 @@
     </section>
 
     <section>
-        <form method="POST" action="/home" class="flex flex-col gap-8">
+        <form method="POST" action="/home/{{ $todo->id }}" class="flex flex-col gap-8">
                 @csrf
                 @method('PATCH')
                 <x-form-field>
                     <x-form-label for="description">Description:</x-form-label>
-                    <x-form-input name="description" id="description" type="text" autocomplete="description" placeholder="To Do's description" required />
+                    <x-form-input name="description" id="description" type="text" autocomplete="description" placeholder="To Do's description" value="{{ $todo->description }}" required />
+                    <x-form-error name="description"></x-form-error>        
                 </x-form-field>
 
                 <div class="flex justify-center">

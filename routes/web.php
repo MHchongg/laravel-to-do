@@ -1,42 +1,29 @@
 <?php
 
+use App\Http\Controllers\RegisteredUserController;
+use App\Http\Controllers\SessionController;
+use App\Http\Controllers\ToDoController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', function () {
-    return view("auth.login");
-});
-Route::post('/login', function () {
-    dd('Login Post');
-});
+Route::get('/login', [SessionController::class, 'create'])->name('login');
+Route::post('/login', [SessionController::class, 'store']);
+Route::post('/logout', [SessionController::class, 'destroy']);
+Route::get('/register', [RegisteredUserController::class, 'create']);
+Route::post('/register', [RegisteredUserController::class, 'store']);
 
-Route::get('/register', function() {
-    return view("auth.register");
-});
-Route::post('/register', function () {
-    dd('Register Post');
-});
-
-Route::get('/home', function() {
-    return view('home.index');
-});
-Route::delete('/home', function() {
-    dd("delete to do");
-});
-
-Route::get('/home/create', function() {
-    return view('home.create');
-});
-Route::post('/home', function() {
-    dd("Submit new to do post");
-});
-
-Route::get('/home/edit', function () {
-    return view('home.edit');
-});
-Route::patch('/home', function() {
-    dd('Update to do');
+Route::middleware('auth')->group(function() {
+    Route::controller(ToDoController::class)->group(function () {
+        Route::get('/home', 'index');
+        Route::get('/home/create', 'create');
+        Route::get('/home/{todo}/edit', 'edit')->can('edit_todo', 'todo');
+        Route::post('/home', 'store');
+        Route::patch('/home/{todo}', 'update');
+        Route::patch('/home/{todo}/complete', 'complete');
+        Route::patch('/home/{todo}/unfinish', 'unfinish');
+        Route::delete('/home/{todo}', 'destroy');
+    });
 });

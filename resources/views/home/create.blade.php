@@ -11,6 +11,7 @@
                 <x-form-field>
                     <x-form-label for="description">Description:</x-form-label>
                     <x-form-input name="description" id="description" type="text" autocomplete="description" placeholder="To Do's description" required />
+                    <x-form-error name="description"></x-form-error>
                 </x-form-field>
 
                 <div class="flex justify-center">

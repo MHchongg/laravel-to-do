@@ -21,8 +21,16 @@
 
         <nav>
             <ul class="w-full h-full flex items-center space-x-4">
-                <li><a href="/login" class="hover:font-bold">Log In</a></li>
-                <li><a href="/register" class="hover:font-bold">Register</a></li>
+                @guest
+                    <li><a href="/login" class="hover:font-bold">Log In</a></li>
+                    <li><a href="/register" class="hover:font-bold">Register</a></li>   
+                @endguest
+                @auth
+                    <form method="POST" action="/logout">
+                        @csrf
+                        <input type="submit" value="Log Out" class="cursor-pointer hover:font-bold" />
+                    </form>
+                @endauth
             </ul>
         </nav>
     </header>
