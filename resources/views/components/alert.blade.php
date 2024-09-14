@@ -8,8 +8,8 @@
         'warning' => 'bg-yellow-500',
     ];
 
-    // Generate a unique ID for each alert to target it with JavaScript
-    $alertId = uniqid('alert-', true);
+    // Generate a unique ID for each alert
+    $alertId = uniqid('alert-');
 @endphp
 
 <div id="{{ $alertId }}"
@@ -19,10 +19,12 @@
 </div>
 
 <script>
-    setTimeout(function() {
-        let alert = document.getElementById('{{ $alertId }}');
-        if (alert) {
-            alert.style.display = 'none';
-        }
-    }, 5000); // Auto-dismiss after 5 seconds
+    $(document).ready(function() {
+        $("#{{ $alertId }}").each(function() {
+            let alert = $(this);
+            setTimeout(function() {
+                alert.fadeOut(500);
+            }, 3000);
+        });
+    });
 </script>

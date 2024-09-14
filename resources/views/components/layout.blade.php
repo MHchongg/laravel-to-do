@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
     @vite(['resources/css/app.css'])
 </head>
 
@@ -23,7 +24,7 @@
             <ul class="w-full h-full flex items-center space-x-4">
                 @guest
                     <li><a href="/login" class="hover:font-bold">Log In</a></li>
-                    <li><a href="/register" class="hover:font-bold">Register</a></li>   
+                    <li><a href="/register" class="hover:font-bold">Register</a></li>
                 @endguest
                 @auth
                     <form method="POST" action="/logout">

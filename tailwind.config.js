@@ -12,6 +12,11 @@ export default {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('daisyui'),
+  ],
+  daisyui: {
+    themes: ["light", "dark", "retro", "aqua", "acid", "coffee", "synthwave"]
+  }
 }
 
