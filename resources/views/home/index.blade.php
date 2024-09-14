@@ -1,26 +1,5 @@
 <x-layout>
     <div class="space-y-8 flex flex-col items-center">
-
-        @if (session('fail'))
-            <section>
-                <div class="bg-red-500 text-sm text-white rounded-lg p-4" role="alert" tabindex="-1"
-                    aria-labelledby="hs-solid-color-danger-label">
-                    <span id="hs-solid-color-danger-label" class="font-bold">Failed</span>
-                    {{ session('fail') }}
-                </div>   
-            </section>
-        @endif
-
-        @if (session('success'))
-            <section>
-                <div class="bg-teal-500 text-sm text-white rounded-lg p-4" role="alert" tabindex="-1"
-                    aria-labelledby="hs-solid-color-success-label">
-                    <span id="hs-solid-color-success-label" class="font-bold">Success</span>
-                    {{ session('success') }}
-                </div>
-            </section>
-        @endif
-
         <section class="w-10/12 space-y-5">
             <x-page-heading>In Progress's To Do - {{ auth()->user()->name }}</x-page-heading>
 
@@ -141,4 +120,12 @@
             </x-button>
         </section>
     </div>
+
+    @if (session('fail'))
+        <x-alert type="danger" :message="session('fail')" />
+    @endif
+
+    @if (session('success'))
+        <x-alert type="success" :message="session('success')" />
+    @endif
 </x-layout>
